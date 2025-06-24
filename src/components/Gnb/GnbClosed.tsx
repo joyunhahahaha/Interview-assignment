@@ -8,10 +8,38 @@ interface GnbClosedProps {
 }
 
 const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => {
+  // title에 따라 아이콘 이미지 경로 지정
+  const getIconPath = (title: string): string => {
+    switch (title) {
+      case '전표입력':
+        return '/File_dock_light.png';
+      case '기초정보등록':
+        return '/Subtract.png';
+      case '장부관리':
+        return '/Book_light.png';
+      case '전기분개제표등':
+        return '/Folder_file_alt_light.png';
+      case '결산 및 재무제표':
+        return '/Rectangle 25.png';
+      case '세무포탈(베스트빌)':
+        return '/desktop_light.png';
+      case '고정자산 및 감가상각':
+        return '/File_dock_light.png';
+      case '세무대리':
+        return '/User_cicrle_light.png';
+      default:
+        return '/File_dock_light.png';
+    }
+  };
+
   return (
     <aside className="w-[60px] h-screen bg-black text-white flex flex-col items-center">
       <button onClick={onToggle} className="my-4 text-sm">
-        열기
+        <img
+          src={process.env.PUBLIC_URL + '/ic_drag.png'}
+          alt="열기"
+          className="w-6 h-6"
+        />
       </button>
 
       <nav className="flex-1 w-full">
@@ -21,16 +49,23 @@ const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => 
               key={item.id}
               className="relative group w-full flex justify-center py-4 hover:bg-gray-800"
             >
-              {/* 아이콘 자리 (예시로 텍스트만) */}
-              <span className="text-xs">{item.title[0]}</span>
+              {/* 아이콘 이미지로 교체 */}
+              <img
+                src={process.env.PUBLIC_URL + getIconPath(item.title)}
+                alt={item.title}
+                className="w-6 h-6"
+              />
 
-              {/* Hover 시 우측에 Second-Depth 표시 */}
+              {/* Hover 시 우측에 2차 메뉴 표시 */}
               {item.children && (
-                <ul className="absolute left-full top-0 bg-white text-black p-2 shadow-lg hidden group-hover:block z-10 min-w-[160px]">
+                <ul className="ml-4 rounded-[5px] absolute left-full top-0 bg-black text-white p-2 shadow-lg hidden group-hover:block z-10 min-w-[231px]">
+                  <img className="w-3 h-5 relative right-4" src={process.env.PUBLIC_URL + '/Vector 513.png'}/> 
+                  <li className="noto-sans-kr-superbold px-2 py-3 text-white text-[18px]">{item.title}</li>
+                  <div className='mb-2 w-[90%] h-[1.5px] bg-white mx-auto bg-opacity-30'></div>
                   {item.children.map((child) => (
                     <li
                       key={child.id}
-                      className={`px-2 py-1 hover:bg-gray-100 cursor-pointer ${
+                      className={`noto-sans-kr-superbold text-[14px] px-2 py-2 hover:bg-gray-100 cursor-pointer ${
                         child.id === selectedId ? 'font-bold' : ''
                       }`}
                     >
