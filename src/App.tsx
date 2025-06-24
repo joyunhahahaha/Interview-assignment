@@ -7,10 +7,7 @@ const App = () => {
 
   return (
    <>
-    <div className='flex'>
-      <Gnb></Gnb>
-
-    </div>
+    
    </>
   );
 };

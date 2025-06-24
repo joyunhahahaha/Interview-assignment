@@ -13,7 +13,9 @@ root.render(
   <React.StrictMode>
     <div className='flex'>
       <Gnb></Gnb>
-
+      <main className='flex-1 bg-white p-4'>
+        
+      </main>
     </div>
   </React.StrictMode>
 );
