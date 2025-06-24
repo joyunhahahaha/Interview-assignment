@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Gnb from './components/gnb/Gnb';
 
 
 const root = ReactDOM.createRoot(
@@ -10,7 +11,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-   
+    <div className='flex'>
+      <Gnb></Gnb>
+
+    </div>
   </React.StrictMode>
 );
 

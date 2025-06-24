@@ -1,7 +1,8 @@
 export interface TreeNode {
-  id: string;
+  id: number; 
   title: string;
   icon?: string;
   children?: TreeNode[];
   link?: string;
 }
+
