@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Gnb from './components/gnb/Gnb';
+import Main from './components/main/Main';
 
 
 const root = ReactDOM.createRoot(
@@ -13,9 +14,8 @@ root.render(
   <React.StrictMode>
     <div className='flex'>
       <Gnb></Gnb>
-      <main className='flex-1 bg-white p-4'>
-        
-      </main>
+      <Main></Main>
+
     </div>
   </React.StrictMode>
 );
