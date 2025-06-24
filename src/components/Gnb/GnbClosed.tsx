@@ -7,33 +7,34 @@ interface GnbClosedProps {
   selectedId: number | null;
 }
 
+// GnbClosed는 GNB가 접힌 상태일 때 보여줄 UI data: 메뉴 데이터 (TreeNode[]) onToggle: GNB를 열기 위한 버튼 핸들러 selectedId: 현재 선택된 메뉴 ID
 const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => {
   // title에 따라 아이콘 이미지 경로 지정
   const getIconPath = (title: string): string => {
-    switch (title) {
+    switch (title) { 
       case '전표입력':
-        return '/File_dock_light.png';
+        return process.env.PUBLIC_URL +'/File_dock_light.png';
       case '기초정보등록':
-        return '/Subtract.png';
+        return process.env.PUBLIC_URL +'/Subtract.png';
       case '장부관리':
-        return '/Book_light.png';
+        return process.env.PUBLIC_URL +'/Book_light.png';
       case '전기분개제표등':
-        return '/Folder_file_alt_light.png';
+        return process.env.PUBLIC_URL +'/Folder_file_alt_light.png';
       case '결산 및 재무제표':
-        return '/Rectangle 25.png';
+        return process.env.PUBLIC_URL +'/Rectangle 25.png';
       case '세무포탈(베스트빌)':
-        return '/desktop_light.png';
+        return process.env.PUBLIC_URL +'/desktop_light.png';
       case '고정자산 및 감가상각':
-        return '/File_dock_light.png';
+        return process.env.PUBLIC_URL +'/File_dock_light.png';
       case '세무대리':
-        return '/User_cicrle_light.png';
+        return process.env.PUBLIC_URL +'/User_cicrle_light.png';
       default:
-        return '/File_dock_light.png';
+        return process.env.PUBLIC_URL +'/File_dock_light.png';
     }
   };
 
   return (
-    <aside className="w-[60px] h-screen bg-black text-white flex flex-col items-center">
+    <aside className="w-[60px] h-[2500px] bg-black text-white flex flex-col items-center">
       <button onClick={onToggle} className="my-4 text-sm">
         <img
           src={process.env.PUBLIC_URL + '/ic_drag.png'}
@@ -45,11 +46,11 @@ const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => 
       <nav className="flex-1 w-full">
         <ul className="flex flex-col items-center">
           {data.map((item) => (
-            <li
+            <li // 각 메뉴 아이템 하나 group 하위 요소의 hover 동작을 컨트롤 하기 위해 사용
               key={item.id}
               className="relative group w-full flex justify-center py-4 hover:bg-gray-800"
             >
-              {/* 아이콘 이미지로 교체 */}
+              {/* 메뉴명에 따라 지정된 아이콘 */}
               <img
                 src={process.env.PUBLIC_URL + getIconPath(item.title)}
                 alt={item.title}
@@ -60,8 +61,9 @@ const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => 
               {item.children && (
                 <ul className="ml-4 rounded-[5px] absolute left-full top-0 bg-black text-white p-2 shadow-lg hidden group-hover:block z-10 min-w-[231px]">
                   <img className="w-3 h-5 relative right-4" src={process.env.PUBLIC_URL + '/Vector 513.png'}/> 
-                  <li className="noto-sans-kr-superbold px-2 py-3 text-white text-[18px]">{item.title}</li>
+                  <li className="noto-sans-kr-superbold px-2 pb-6 text-white text-[18px]">{item.title}</li>
                   <div className='mb-2 w-[90%] h-[1.5px] bg-white mx-auto bg-opacity-30'></div>
+                  {/* 자식 메뉴 리스트 반복  */}
                   {item.children.map((child) => (
                     <li
                       key={child.id}
