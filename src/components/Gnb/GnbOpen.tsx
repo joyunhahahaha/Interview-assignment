@@ -58,7 +58,7 @@ const GnbOpen: React.FC<GnbOpenProps> = ({
   return (
     <aside className="w-[280px] h-[2500px] bg-black text-white">
       {/* 헤더 */}
-      <div className="flex w-60 justify-between items-center mx-auto pt-2 pb-2 px-1 h-16">
+      <div className="flex w-52 justify-between items-center mx-auto pt-2 pb-2 px-2 h-16">
         <h1 className="text-white text-[24px] leading-[150%] tracking-[-0.5px] font-bold">
           전체 메뉴
         </h1>

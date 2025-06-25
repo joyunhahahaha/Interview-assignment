@@ -1,32 +1,39 @@
+// components/main/ViewClient.tsx
 import React from "react";
-import { ClientWithCompanyDetails } from "../../types/information"; // 타입 정의
+import { ClientWithCompanyDetails } from "../../types/information";
 
 interface ViewClientProps {
   client: ClientWithCompanyDetails;
-  onEdit: () => void; // 수정 버튼 클릭 시 호출
+  onEdit: () => void;
 }
 
 const ViewClient: React.FC<ViewClientProps> = ({ client, onEdit }) => {
+  const c = client.company;
+
   return (
-    <div className="view-client">
-      <h2>사업자 정보 조회</h2>
-      <div>
-        <p><strong>회사명:</strong> {client.company?.printable_company_name}</p>
-        <p><strong>사업자등록번호:</strong> {client.company?.brn}</p>
-        <p><strong>대표자명:</strong> {client.company?.ceo_name}</p>
-        <p><strong>사업 종류:</strong> {client.company?.business_type}</p>
-        <p><strong>사업 아이템:</strong> {client.company?.item}</p>
-        <p><strong>주소:</strong> {client.company?.address}</p>
-        <p><strong>전화:</strong> {client.company?.phone}</p>
-        <p><strong>팩스:</strong> {client.company?.fax}</p>
-        <p><strong>이메일:</strong> {client.company?.email}</p>
-        <p><strong>보증금:</strong> {client.company?.guarantee_amount}</p>
-      </div>
-      <button onClick={onEdit} className="btn-edit w-11 h-20 bg-black text-white"
-       style={{ backgroundColor: 'black', color: 'white', padding: '10px', borderRadius: '5px' }}
-     >수정</button> {/* 수정 버튼 */}
+    <div>
+      <h2 className="text-xl font-semibold mb-4">거래처 조회</h2>
+      <table className="w-full text-sm">
+        <tbody>
+          <tr><td>회사명</td><td>{c.printable_company_name}</td></tr>
+          <tr><td>사업자등록번호</td><td>{formatBRN(c.brn)}</td></tr>
+          <tr><td>대표자명</td><td>{c.ceo_name}</td></tr>
+          <tr><td>업종</td><td>{c.business_type}</td></tr>
+          <tr><td>종목</td><td>{c.item}</td></tr>
+          <tr><td>주소</td><td>{c.address}</td></tr>
+          <tr><td>연락처</td><td>{formatPhone(c.phone)}</td></tr>
+          <tr><td>팩스</td><td>{formatPhone(c.fax)}</td></tr>
+          <tr><td>이메일</td><td>{c.email}</td></tr>
+          <tr><td>보증금</td><td>{formatCurrency(c.guarantee_amount)}</td></tr>
+        </tbody>
+      </table>
+      <button onClick={onEdit} className="mt-4 px-4 py-2 bg-black text-white rounded">수정</button>
     </div>
   );
 };
+
+const formatBRN = (v: string) => v.replace(/^(\d{3})(\d{2})(\d{5})$/, "$1-$2-$3");
+const formatPhone = (v: string) => v.replace(/(\d{2,3})(\d{3,4})(\d{4})/, "$1-$2-$3");
+const formatCurrency = (v: string) => parseInt(v).toLocaleString("ko-KR") + "원";
 
 export default ViewClient;

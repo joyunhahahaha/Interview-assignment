@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Client, ClientWithCompanyDetails } from "../../types/information";
 import ViewClient from "./ViewClient";
 import EditClient from "./EditClient";
+import ClientList from "./ClientList"; 
 import clientsData from "../../data/clients.json";
 import companiesData from "../../data/companies.json";
 
@@ -9,69 +10,47 @@ const Main: React.FC = () => {
   const [clients, setClients] = useState<Client[]>(clientsData);
   const [clientsWithDetails, setClientsWithDetails] = useState<ClientWithCompanyDetails[]>([]);
   const [selectedClient, setSelectedClient] = useState<ClientWithCompanyDetails | null>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false); // 조회/수정 화면 전환용 상태
 
   useEffect(() => {
-    const enrichedClients = clients.map((client) => {
-      const company = companiesData.find((c) => c.brn === client.brn);
-      return {
-        ...client,
-        company: company || {
-          brn: "",
-          resident_registration_number: "",
-          resident_type: false,
-          ceo_name: "",
-          sub_business_number: 0,
-          business_type: "",
-          item: "",
-          zipcode: "",
-          address: "",
-          phone: "",
-          fax: "",
-          department: "",
-          manager: "",
-          printable_company_name: "",
-          guarantee_amount: "",
-          credit_limit: "",
-          bank: "",
-          account_holder: "",
-          account_number: "",
-          email: "",
-          category1: "",
-          category2: "",
-          contract_start: "",
-          contract_end: "",
-          note: "",
-          is_active: true,
-        },
-      };
-    });
+    const enrichedClients = clients
+      .map((client) => {
+        const company = companiesData.find((c) => c.brn === client.brn);
+        if (!company) return null;
+        return {
+          ...client,
+          company,
+        };
+      })
+      .filter((c): c is ClientWithCompanyDetails => c !== null);
+
     setClientsWithDetails(enrichedClients);
-    if (enrichedClients.length > 0) {
+
+    if (!selectedClient && enrichedClients.length > 0) {
       setSelectedClient(enrichedClients[0]);
     }
-  }, [clients]);
+  }, [clients, selectedClient]);
 
-  const handleEditClient = () => {
-    setIsEditMode(true);
-  };
-
-  const handleSaveEdit = (updatedClient: ClientWithCompanyDetails) => {
-    setClients((prev) =>
-      prev.map((client) =>
-        client.code === updatedClient.code ? updatedClient : client
-      )
-    );
+  const handleSelectClient = (client: ClientWithCompanyDetails) => {
+    setSelectedClient(client);
     setIsEditMode(false);
   };
 
-  const handleCancelEdit = () => {
+  const handleEditClient = () => setIsEditMode(true);
+  const handleCancelEdit = () => setIsEditMode(false);
+
+  const handleSaveEdit = (updatedClient: ClientWithCompanyDetails) => {
+    const updatedClients = clientsWithDetails.map((c) =>
+      c.code === updatedClient.code ? updatedClient : c
+    );
+    setClientsWithDetails(updatedClients);
+    setSelectedClient(updatedClient);
     setIsEditMode(false);
   };
 
   return (
-    <div className="main-container flex flex-col items-center gap-6">
-      {/* 상단 메뉴 영역 */}
+    <div className="main-container flex flex-col items-center gap-6 w-full">
+      {/* 상단 메뉴 */}
       <div className="flex justify-center items-center w-[90%] gap-6">
         <div className="flex justify-center items-center w-[300px] gap-2">
           <img src="" alt="아이콘" className="w-6 h-6" />
@@ -90,31 +69,37 @@ const Main: React.FC = () => {
       {/* 검색 영역 */}
       <div className="flex justify-center items-center w-[90%] gap-4">
         <select className="border p-2 rounded">
-          <option>회사명</option>
-          <option>사업자등록번호</option>
+          <option>전체</option>
         </select>
-        <input
-          type="text"
-          placeholder="검색어를 입력하세요"
-          className="border p-2 rounded w-64"
-        />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          검색
-        </button>
+        <input type="text" placeholder="검색어를 입력해주세요" className="border p-2 rounded w-64" />
+        <button className="bg-black text-white px-4 py-2 rounded">검색</button>
       </div>
 
-      {/* 화면 전환 영역 */}
-      <div className="w-full max-w-4xl mt-8">
-        {selectedClient && !isEditMode && (
-          <ViewClient client={selectedClient} onEdit={handleEditClient} />
-        )}
-        {selectedClient && isEditMode && (
-          <EditClient
-            client={selectedClient}
-            onCancel={handleCancelEdit}
-            onSave={handleSaveEdit}
-          />
-        )}
+      {/* 거래처 목록 + 상세/수정 패널 */}
+      <div className="w-[90%] flex gap-4">
+        <ClientList 
+          clients={clientsWithDetails} 
+          selectedCode={selectedClient?.code || ""} 
+          onSelect={handleSelectClient} 
+        />
+        <div className="flex-1 border p-4 bg-white rounded shadow">
+          {selectedClient && selectedClient.company ? (
+            isEditMode ? (
+              <EditClient 
+                client={selectedClient} 
+                onCancel={handleCancelEdit} 
+                onSave={handleSaveEdit} 
+              />
+            ) : (
+              <ViewClient 
+                client={selectedClient} 
+                onEdit={handleEditClient} 
+              />
+            )
+          ) : (
+            <div className="text-gray-500">선택된 거래처가 없거나 회사 정보가 없습니다.</div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,11 @@
+// types/information.ts
+export interface Client {
+  code: string;
+  brn: string;
+  name: string;
+  type: string;
+}
+
 export interface Company {
   brn: string;
   resident_registration_number: string;
@@ -27,13 +35,6 @@ export interface Company {
   is_active: boolean;
 }
 
-export interface Client {
-  code: string;
-  brn: string;
-  name: string;
-  type: string;
-}
-
 export interface ClientWithCompanyDetails extends Client {
-  company: Company; // company를 필수로 설정
+  company: Company;
 }
