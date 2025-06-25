@@ -33,20 +33,20 @@ const ClientList: React.FC<Props> = ({ clients, selectedCode, onSelect }) => {
           <tr
             key={client.code}
             onClick={() => onSelect(client)}
-            className={`noto-sans-kr-semibold text-center cursor-pointer hover:bg-gray-50 ${
+            className={`noto-sans-kr-normal text-black text-center cursor-pointer hover:bg-gray-50 ${
               client.code === selectedCode ? "bg-gray-200 font-semibold" : ""
             }`}
           >
-            <td className="text-center py-2 border border-gray-200">{clients.length - index}</td>
-            <td className="text-center py-2 border border-gray-200">
+            <td className="text-center py-4 border border-gray-200">{clients.length - index}</td>
+            <td className="text-center py-4 border border-gray-200">
               <input type="checkbox" className="cursor-pointer" />
             </td>
-            <td className="text-center py-2 border border-gray-200">{client.code}</td>
-            <td className="text-left py-2 pl-2 border border-gray-200">
+            <td className="text-center py-4 border border-gray-200">{client.code}</td>
+            <td className="text-center py-4 pl-2 border border-gray-200">
               {client.company?.printable_company_name}
             </td>
-            <td className="text-center py-2 border border-gray-200">{formatBRN(client.brn)}</td>
-            <td className="text-center py-2 border border-gray-200">{client.type}</td>
+            <td className="text-center py-4 border border-gray-200">{formatBRN(client.brn)}</td>
+            <td className="text-center py-4 border border-gray-200">{client.type}</td>
           </tr>
         ))}
       </tbody>
