@@ -96,7 +96,7 @@ const Main: React.FC = () => {
         </div>
 
         {/* 검색 버튼 */}
-        <button className="bg-black text-white px-4 py-2 rounded text-sm whitespace-nowrap">
+        <button className="noto-sans-kr-superbold leading-[150%] tracking-[-0.5px] bg-black text-white px-6 py-2 rounded text-sm whitespace-nowrap">
           검색
         </button>
       </div>
@@ -108,7 +108,7 @@ const Main: React.FC = () => {
           selectedCode={selectedClient?.code || ""}
           onSelect={handleSelectClient}
         />
-        <div className="flex-1 border p-4 bg-white rounded shadow">
+        <div className="flex-1">
           {selectedClient && selectedClient.company ? (
             isEditMode ? (
               <EditClient

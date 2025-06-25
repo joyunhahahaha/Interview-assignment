@@ -9,46 +9,50 @@ interface Props {
 
 const ClientList: React.FC<Props> = ({ clients, selectedCode, onSelect }) => {
   return (
-    <div className="w-[45%] border rounded shadow">
-      {/* 등록 버튼 */}
-      <div className="flex justify-end p-2">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded">등록</button>
-      </div>
+ <div className="w-[45%] noto-sans-kr-superbold leading-[150%] tracking-[-0.5px]">
+  {/* 등록 버튼 */}
+  <div className="flex justify-end mb-4">
+    <button className="px-6 py-2 bg-black text-white rounded">등록</button>
+  </div>
 
-      {/* 테이블 헤더 */}
-      <table className="w-full table-fixed text-sm">
-        <thead>
-          <tr className="bg-gray-100 text-center">
-            <th className="w-12">No</th>
-            <th className="w-12">✔</th>
-            <th className="w-24">코드</th>
-            <th>거래처명</th>
-            <th className="w-32">등록번호</th>
-            <th className="w-20">유형</th>
+  {/* 테이블 영역 */}
+  <div className="border rounded shadow bg-white max-h-[600px] overflow-y-scroll custom-scrollbar">
+    <table className="text-center w-full table-fixed text-sm border-collapse">
+      <thead className="bg-gray-100 sticky top-0 z-10 text-[#777777] noto-sans-kr-semibold">
+        <tr>
+          <th className="w-12 py-2 border border-gray-200">No</th>
+          <th className="w-12 py-2 border border-gray-200">✔</th>
+          <th className="w-24 py-2 border border-gray-200">코드</th>
+          <th className="py-2 border border-gray-200">거래처명</th>
+          <th className="w-32 py-2 border border-gray-200">등록번호</th>
+          <th className="w-20 py-2 border border-gray-200">유형</th>
+        </tr>
+      </thead>
+      <tbody>
+        {clients.map((client, index) => (
+          <tr
+            key={client.code}
+            onClick={() => onSelect(client)}
+            className={`noto-sans-kr-semibold text-center cursor-pointer hover:bg-gray-50 ${
+              client.code === selectedCode ? "bg-gray-200 font-semibold" : ""
+            }`}
+          >
+            <td className="text-center py-2 border border-gray-200">{clients.length - index}</td>
+            <td className="text-center py-2 border border-gray-200">
+              <input type="checkbox" className="cursor-pointer" />
+            </td>
+            <td className="text-center py-2 border border-gray-200">{client.code}</td>
+            <td className="text-left py-2 pl-2 border border-gray-200">
+              {client.company?.printable_company_name}
+            </td>
+            <td className="text-center py-2 border border-gray-200">{formatBRN(client.brn)}</td>
+            <td className="text-center py-2 border border-gray-200">{client.type}</td>
           </tr>
-        </thead>
-        <tbody>
-          {clients.map((client, index) => (
-            <tr
-              key={client.code}
-              onClick={() => onSelect(client)}
-              className={`cursor-pointer hover:bg-gray-100 text-center ${
-                client.code === selectedCode ? "bg-gray-200 font-semibold" : ""
-              }`}
-            >
-              <td>{clients.length - index}</td>
-              <td>
-                <input type="checkbox" className="cursor-pointer" />
-              </td>
-              <td>{client.code}</td>
-              <td className="text-left pl-2">{client.company?.printable_company_name}</td>
-              <td>{formatBRN(client.brn)}</td>
-              <td>{client.type}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
   );
 };
 

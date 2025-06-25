@@ -10,19 +10,20 @@ const ViewClient: React.FC<ViewClientProps> = ({ client, onEdit }) => {
   const c = client.company;
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       {/* 상단 제목 + 수정 버튼 */}
-      <div className="flex justify-between items-center border-b pb-2 mb-4">
-        <h2 className="text-xl font-bold">거래처 정보</h2>
+      <div className="flex justify-between items-center  mb-4">
+        <h2 className="text-xl font-bold opacity-0">거래처 정보</h2>
         <button
           onClick={onEdit}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="border-gray-300 noto-sans-kr-superbold leading-[150%] tracking-[-0.5px] px-6 py-2 bg-white text-black rounded hover:bg-black hover:text-white"
         >
           수정
         </button>
       </div>
 
       {/* 정보 테이블 */}
+      <div className="border p-4 bg-white rounded shadow">
       <table className="w-full table-fixed border border-gray-300 text-sm">
         <tbody>
           <TableRow label="회사명" value={c.printable_company_name} />
@@ -51,6 +52,7 @@ const ViewClient: React.FC<ViewClientProps> = ({ client, onEdit }) => {
           <TableRow label="사용여부" value={c.is_active ? "여" : "부"} />
         </tbody>
       </table>
+      </div>
     </div>
   );
 };
