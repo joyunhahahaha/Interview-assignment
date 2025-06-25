@@ -54,8 +54,8 @@ const Main: React.FC = () => {
       {/* 상단 메뉴 */}
       <div className="flex justify-center items-center w-[90%] gap-6">
         <div className="flex justify-center items-center w-[300px] gap-2">
-          <img src="" alt="아이콘" className="w-6 h-6" />
-          <h1 className="text-lg font-semibold">거래처 등록</h1>
+          <img src={process.env.PUBLIC_URL + '/1F4BB_Laptop 1'} alt="아이콘" className="w-12 h-12" />
+          <h1 className="text-lg noto-sans-kr-superbold leading-[150%] tracking-[-0.5px] ">거래처 등록</h1>
         </div>
         <div className="flex justify-center items-center w-[300px] gap-2">
           <img src="" alt="아이콘" className="w-6 h-6" />
