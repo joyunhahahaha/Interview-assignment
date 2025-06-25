@@ -13,23 +13,24 @@ const Main: React.FC = () => {
   const [isEditMode, setIsEditMode] = useState(false); // 조회/수정 화면 전환용 상태
 
   useEffect(() => {
-    const enrichedClients = clients
-      .map((client) => {
-        const company = companiesData.find((c) => c.brn === client.brn);
-        if (!company) return null;
-        return {
-          ...client,
-          company,
-        };
-      })
-      .filter((c): c is ClientWithCompanyDetails => c !== null);
+  const enrichedClients = clients
+    .map((client) => {
+      const company = companiesData.find((c) => c.brn === client.brn);
+      if (!company) return null;
+      return {
+        ...client,
+        company,
+      };
+    })
+    .filter((c): c is ClientWithCompanyDetails => c !== null)
+    .sort((a, b) => a.code.localeCompare(b.code)); // ✅ 코드 기준 오름차순 정렬
 
-    setClientsWithDetails(enrichedClients);
+  setClientsWithDetails(enrichedClients);
 
-    if (!selectedClient && enrichedClients.length > 0) {
-      setSelectedClient(enrichedClients[0]);
-    }
-  }, [clients, selectedClient]);
+  if (!selectedClient && enrichedClients.length > 0) {
+    setSelectedClient(enrichedClients[0]);
+  }
+}, [clients]);
 
   const handleSelectClient = (client: ClientWithCompanyDetails) => {
     setSelectedClient(client);
