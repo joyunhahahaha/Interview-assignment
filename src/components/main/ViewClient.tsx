@@ -1,4 +1,3 @@
-// components/main/ViewClient.tsx
 import React from "react";
 import { ClientWithCompanyDetails } from "../../types/information";
 
@@ -11,29 +10,61 @@ const ViewClient: React.FC<ViewClientProps> = ({ client, onEdit }) => {
   const c = client.company;
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">거래처 조회</h2>
-      <table className="w-full text-sm">
+    <div className="w-full">
+      {/* 상단 제목 + 수정 버튼 */}
+      <div className="flex justify-between items-center border-b pb-2 mb-4">
+        <h2 className="text-xl font-bold">거래처 정보</h2>
+        <button
+          onClick={onEdit}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          수정
+        </button>
+      </div>
+
+      {/* 정보 테이블 */}
+      <table className="w-full table-fixed border border-gray-300 text-sm">
         <tbody>
-          <tr><td>회사명</td><td>{c.printable_company_name}</td></tr>
-          <tr><td>사업자등록번호</td><td>{formatBRN(c.brn)}</td></tr>
-          <tr><td>대표자명</td><td>{c.ceo_name}</td></tr>
-          <tr><td>업종</td><td>{c.business_type}</td></tr>
-          <tr><td>종목</td><td>{c.item}</td></tr>
-          <tr><td>주소</td><td>{c.address}</td></tr>
-          <tr><td>연락처</td><td>{formatPhone(c.phone)}</td></tr>
-          <tr><td>팩스</td><td>{formatPhone(c.fax)}</td></tr>
-          <tr><td>이메일</td><td>{c.email}</td></tr>
-          <tr><td>보증금</td><td>{formatCurrency(c.guarantee_amount)}</td></tr>
+          <TableRow label="회사명" value={c.printable_company_name} />
+          <TableRow label="사업자등록번호" value={formatBRN(c.brn)} />
+          <TableRow label="주민등록번호" value={formatSSN(c.resident_registration_number)} />
+          <TableRow label="대표자명" value={c.ceo_name} />
+          <TableRow label="업종" value={c.business_type} />
+          <TableRow label="종목" value={c.item} />
+          <TableRow label="우편번호" value={c.zipcode} />
+          <TableRow label="주소" value={c.address} />
+          <TableRow label="연락처" value={formatPhone(c.phone)} />
+          <TableRow label="팩스" value={formatPhone(c.fax)} />
+          <TableRow label="부서" value={c.department} />
+          <TableRow label="담당자" value={c.manager} />
+          <TableRow label="이메일" value={c.email} />
+          <TableRow label="보증금" value={formatCurrency(c.guarantee_amount)} />
+          <TableRow label="여신한도" value={formatCurrency(c.credit_limit)} />
+          <TableRow label="은행명" value={c.bank} />
+          <TableRow label="예금주" value={c.account_holder} />
+          <TableRow label="계좌번호" value={c.account_number} />
+          <TableRow label="업종분류1" value={c.category1} />
+          <TableRow label="업종분류2" value={c.category2} />
+          <TableRow label="계약시작일" value={c.contract_start} />
+          <TableRow label="계약종료일" value={c.contract_end} />
+          <TableRow label="비고" value={c.note} />
+          <TableRow label="사용여부" value={c.is_active ? "여" : "부"} />
         </tbody>
       </table>
-      <button onClick={onEdit} className="mt-4 px-4 py-2 bg-black text-white rounded">수정</button>
     </div>
   );
 };
 
+const TableRow = ({ label, value }: { label: string; value: string }) => (
+  <tr className="border-b border-gray-200">
+    <td className="w-1/4 bg-gray-50 px-3 py-2 font-semibold">{label}</td>
+    <td className="w-3/4 px-3 py-2">{value}</td>
+  </tr>
+);
+
 const formatBRN = (v: string) => v.replace(/^(\d{3})(\d{2})(\d{5})$/, "$1-$2-$3");
+const formatSSN = (v: string) => v.replace(/^(\d{6})(\d{7})$/, "$1-$2");
 const formatPhone = (v: string) => v.replace(/(\d{2,3})(\d{3,4})(\d{4})/, "$1-$2-$3");
-const formatCurrency = (v: string) => parseInt(v).toLocaleString("ko-KR") + "원";
+const formatCurrency = (v: string) => parseInt(v, 10).toLocaleString("ko-KR") + "원";
 
 export default ViewClient;
