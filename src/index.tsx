@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <div className='flex'>
+    <div className='flex bg-[#f4f4f4]'>
       <Gnb></Gnb>
       <Main></Main>
 
