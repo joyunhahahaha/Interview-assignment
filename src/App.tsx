@@ -1,6 +1,6 @@
 import React from 'react';
-import GnbClosed from './components/gnb/GnbClosed';
-import Gnb from './components/gnb/Gnb';
+import GnbClosed from './components/Gnb/GnbClosed';
+import Gnb from './components/Gnb/Gnb';
 import './index.css';
 
 const App = () => {

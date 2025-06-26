@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Gnb from './components/gnb/Gnb';
+import Gnb from './components/Gnb/Gnb';
 import Main from './components/main/Main';
 import 'react-datepicker/dist/react-datepicker.css';
 
