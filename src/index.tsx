@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Gnb from './components/gnb/Gnb';
 import Main from './components/main/Main';
-
+import 'react-datepicker/dist/react-datepicker.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

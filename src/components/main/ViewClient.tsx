@@ -93,7 +93,7 @@ const ViewClient: React.FC<ViewClientProps> = ({ client, onEdit }) => {
         </tr>
        
         <tr>
-          <td className="bg-gray-50 border px-2 py-4 noto-sans-kr-superbold text-[#777777]">거래처 분류명</td>
+          <td className="bg-gray-50 border px-2 py-4 noto-sans-kr-superbold text-[#777777]">거래처 시작(종료)일</td>
           <td className="border px-2 py-2" colSpan={3}>{c.contract_start} <span>-</span> {c.contract_end}</td>
         </tr>
      
