@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Client, ClientWithCompanyDetails } from "../../types/information";
 import ViewClient from "./ViewClient";
@@ -50,6 +51,16 @@ const Main: React.FC = () => {
     setClientsWithDetails(updatedClients);
     setSelectedClient(updatedClient);
     setIsEditMode(false);
+  };
+
+
+  const handleSaveNew = (newC: ClientWithCompanyDetails) => {
+    // 1) clientsData 에도 code/brn/name/type 추가
+    setClients(prev => [
+      ...prev,
+      { code: newC.code, brn: newC.brn, name: newC.name, type: newC.type }
+    ]);
+    // 새로고침 후에도 로컬 json 유지하려면, 실제 서버나 로컬스토리지 저장 필요
   };
 
   return (
