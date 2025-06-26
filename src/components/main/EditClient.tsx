@@ -42,6 +42,27 @@ const EditClient: React.FC<EditClientProps> = ({ client, onCancel, onSave }) => 
     );
   };
 
+
+  // 우편번호 검색
+  const callPostcode = () => {
+    new (window as any).daum.Postcode({
+      oncomplete: (data: any) => {
+        setEdited((prev) =>
+          prev
+            ? {
+                ...prev,
+                company: {
+                  ...prev.company,
+                  zipcode: data.zonecode,
+                  address: data.address,
+                },
+              }
+            : prev
+        );
+      },
+    }).open();
+  };
+
   return (
     <div className="w-full">
       {/* 상단 제목 + 버튼 */}
@@ -131,7 +152,7 @@ const EditClient: React.FC<EditClientProps> = ({ client, onCancel, onSave }) => 
                     onChange={(e) => handleChange(e, "zipcode")}
                     className="w-full border px-2 py-1 rounded"
                   />
-                  <button className="noto-sans-kr-normal text-black px-2 py-1 border rounded hover:bg-black hover:text-white transition whitespace-nowrap">
+                  <button onClick={callPostcode} className="noto-sans-kr-normal text-black px-2 py-1 border rounded hover:bg-black hover:text-white transition whitespace-nowrap">
                     우편번호 조회
                   </button>
                 </div>
