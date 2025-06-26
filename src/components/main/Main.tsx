@@ -5,12 +5,15 @@ import EditClient from "./EditClient";
 import ClientList from "./ClientList";
 import clientsData from "../../data/clients.json";
 import companiesData from "../../data/companies.json";
+import NewClientModal from "./NewClientModal"; // ✅ 임포트 추가
 
 const Main: React.FC = () => {
   const [clients, setClients] = useState<Client[]>(clientsData);
   const [clientsWithDetails, setClientsWithDetails] = useState<ClientWithCompanyDetails[]>([]);
   const [selectedClient, setSelectedClient] = useState<ClientWithCompanyDetails | null>(null);
   const [isEditMode, setIsEditMode] = useState(false); // 조회/수정 화면 전환용 상태
+   // 기존 상태 정의...
+  const [isNewModalOpen, setIsNewModalOpen] = useState(false);
 
   useEffect(() => {
     const enrichedClients = clients
@@ -107,7 +110,20 @@ const Main: React.FC = () => {
           clients={clientsWithDetails}
           selectedCode={selectedClient?.code || ""}
           onSelect={handleSelectClient}
+          onNew={() => setIsNewModalOpen(true)} // ✅ 추가
         />
+        {/* 상세 / 수정 영역 */}
+
+      {isNewModalOpen && (
+        <NewClientModal
+          onClose={() => setIsNewModalOpen(false)}
+          onSave={(newClient) => {
+            setClients(prev => [...prev, { code: newClient.code, brn: newClient.brn, name: newClient.name, type: newClient.type }]); // name/type 필요하면 변경
+            setClientsWithDetails(prev => [...prev, newClient]);
+            setSelectedClient(newClient);
+          }}
+        />
+      )}
         <div className="flex-1">
           {selectedClient && selectedClient.company ? (
             isEditMode ? (

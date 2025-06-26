@@ -5,14 +5,15 @@ interface Props {
   clients: ClientWithCompanyDetails[];
   selectedCode: string;
   onSelect: (client: ClientWithCompanyDetails) => void;
+  onNew: () => void; // ✅ 추가
 }
 
-const ClientList: React.FC<Props> = ({ clients, selectedCode, onSelect }) => {
+const ClientList: React.FC<Props> = ({ clients, selectedCode, onSelect, onNew }) => {
   return (
  <div className="w-[45%] noto-sans-kr-superbold leading-[150%] tracking-[-0.5px]">
   {/* 등록 버튼 */}
   <div className="flex justify-end mb-4">
-    <button className="px-6 py-2 bg-black text-white rounded">등록</button>
+    <button onClick={onNew} className="px-6 py-2 bg-black text-white rounded">등록</button>
   </div>
 
   {/* 테이블 영역 */}
