@@ -129,6 +129,8 @@ const formatCurrency = (v: string): string => {
   const numeric = parseInt(cleaned, 10); // 숫자로 변환
   return numeric.toLocaleString("ko-KR") + "원"; // 콤마 넣고 "원" 붙이기
 };
+
+
 const formatZipcode = (v: string) => `(${v}) `;
 
 export default ViewClient;
