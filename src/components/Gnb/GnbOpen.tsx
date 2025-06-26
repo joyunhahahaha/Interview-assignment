@@ -43,7 +43,7 @@ const GnbOpen: React.FC<GnbOpenProps> = ({
       case '전기분개제표등':
         return { src: process.env.PUBLIC_URL +'/Folder_file_alt_light.png', width: 24, height: 24 };
       case '결산 및 재무제표':
-        return { src: process.env.PUBLIC_URL +'/Rectangle 25.png', width: 22, height: 22 };
+        return { src: process.env.PUBLIC_URL +'/Form_light.png', width: 22, height: 22 };
       case '세무포탈(베스트빌)':
         return { src: process.env.PUBLIC_URL +'/desktop_light.png', width: 22, height: 22 };
       case '고정자산 및 감가상각':

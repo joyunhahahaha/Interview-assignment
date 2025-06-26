@@ -21,7 +21,7 @@ const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => 
       case '전기분개제표등':
         return process.env.PUBLIC_URL +'/Folder_file_alt_light.png';
       case '결산 및 재무제표':
-        return process.env.PUBLIC_URL +'/Rectangle 25.png';
+        return process.env.PUBLIC_URL +'/Form_light.png';
       case '세무포탈(베스트빌)':
         return process.env.PUBLIC_URL +'/desktop_light.png';
       case '고정자산 및 감가상각':
