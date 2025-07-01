@@ -13,23 +13,23 @@ const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => 
   const getIconPath = (title: string): string => {
     switch (title) { 
       case '전표입력':
-        return  '/File_dock_light.png';
+        return  './File_dock_light.png';
       case '기초정보등록':      
-        return '/Subtract.png';
+        return './Subtract.png';
       case '장부관리':
-        return '/Book_light.png';
+        return './Book_light.png';
       case '전기분개제표등':
-        return '/Folder_file_alt_light.png';
+        return './Folder_file_alt_light.png';
       case '결산 및 재무제표':
-        return '/Form_light.png';
+        return './Form_light.png';
       case '세무포탈(베스트빌)':
-        return '/desktop_light.png';
+        return './desktop_light.png';
       case '고정자산 및 감가상각':
-        return '/File_dock_light.png';
+        return './File_dock_light.png';
       case '세무대리':
-        return '/User_cicrle_light.png';
+        return './User_cicrle_light.png';
       default:
-        return '/File_dock_light.png';
+        return './File_dock_light.png';
     }
   };
 
