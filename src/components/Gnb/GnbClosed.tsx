@@ -37,7 +37,7 @@ const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => 
     <aside className="z-50 absolute left-0 top-0 w-[60px] h-[2500px] bg-black text-white flex flex-col items-center">
       <button onClick={onToggle} className="my-4 text-sm">
         <img
-          src={process.env.PUBLIC_URL + '/ic_drag.png'}
+          src={process.env.PUBLIC_URL + './ic_drag.png'}
           alt="열기"
           className="w-6 h-6"
         />
