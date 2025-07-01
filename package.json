@@ -27,7 +27,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://joyunhahahaha.github.io/Interview-assignment",
+  "homepage": "https://joyunhahahaha.github.io/Interview-assignment/",
   "eslintConfig": {
     "extends": [
       "react-app",
