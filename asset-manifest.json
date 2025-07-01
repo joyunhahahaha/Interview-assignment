@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Interview-assignment/static/css/main.92e8bb30.css",
-    "main.js": "/Interview-assignment/static/js/main.f746f767.js",
+    "main.js": "/Interview-assignment/static/js/main.891b7fb0.js",
     "static/js/453.96453769.chunk.js": "/Interview-assignment/static/js/453.96453769.chunk.js",
     "static/js/464.977c81f3.chunk.js": "/Interview-assignment/static/js/464.977c81f3.chunk.js",
     "index.html": "/Interview-assignment/index.html",
     "main.92e8bb30.css.map": "/Interview-assignment/static/css/main.92e8bb30.css.map",
-    "main.f746f767.js.map": "/Interview-assignment/static/js/main.f746f767.js.map",
+    "main.891b7fb0.js.map": "/Interview-assignment/static/js/main.891b7fb0.js.map",
     "453.96453769.chunk.js.map": "/Interview-assignment/static/js/453.96453769.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.92e8bb30.css",
-    "static/js/main.f746f767.js"
+    "static/js/main.891b7fb0.js"
   ]
 }
