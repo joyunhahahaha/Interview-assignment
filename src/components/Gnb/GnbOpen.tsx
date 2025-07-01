@@ -64,7 +64,7 @@ const GnbOpen: React.FC<GnbOpenProps> = ({
         </h1>
         <button onClick={onToggle}>
           <img
-            src={process.env.PUBLIC_URL + './ic_close.png'}
+             src={process.env.PUBLIC_URL + '/ic_close.png'}
             alt="닫기"
             className="w-6 h-6"
           />
