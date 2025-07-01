@@ -314,11 +314,28 @@ const EditClient: React.FC<EditClientProps> = ({ client, onCancel, onSave }) => 
                   <div className="flex items-center gap-2">
                     <span>시작일</span>
                     <DatePicker
-                      selected={new Date(c.contract_start)}
-                      onChange={(date) => handleChange({ target: { value: date?.toISOString().slice(0, 10) || "" } } as any, "contract_start")}
+                     selected={
+                        c.contract_start
+                          ? new Date(c.contract_start)
+                          : null
+                      }
+                      onChange={(date) =>
+                        handleChange(
+                          {
+                            target: {
+                              value: date
+                                ? date.toISOString().slice(0, 10)
+                                : "",
+                            },
+                          } as any,
+                          "contract_start"
+                        )
+                      }
                       dateFormat="yyyy-MM-dd"
                       locale={ko}
+                      placeholderText="YYYY-MM-DD"
                       className="border px-2 py-1 rounded w-[150px]"
+                    
                     />
                   </div>
 
@@ -326,10 +343,24 @@ const EditClient: React.FC<EditClientProps> = ({ client, onCancel, onSave }) => 
                   <div className="flex items-center gap-2">
                     <span>~ 종료일</span>
                     <DatePicker
-                      selected={new Date(c.contract_end)}
-                      onChange={(date) => handleChange({ target: { value: date?.toISOString().slice(0, 10) || "" } } as any, "contract_end")}
+                        selected={
+                        c.contract_end ? new Date(c.contract_end) : null
+                      }
+                      onChange={(date) =>
+                        handleChange(
+                          {
+                            target: {
+                              value: date
+                                ? date.toISOString().slice(0, 10)
+                                : "",
+                            },
+                          } as any,
+                          "contract_end"
+                        )
+                      }
                       dateFormat="yyyy-MM-dd"
                       locale={ko}
+                      placeholderText="YYYY-MM-DD"
                       className="border px-2 py-1 rounded w-[150px]"
                     />
                   </div>
