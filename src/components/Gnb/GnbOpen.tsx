@@ -35,23 +35,23 @@ const GnbOpen: React.FC<GnbOpenProps> = ({
   const getIconInfo = (title: string): IconInfo => {
     switch (title) {
       case '전표입력':
-        return { src:'/File_dock_light.png', width: 23, height: 23 };
+        return { src:'./File_dock_light.png', width: 23, height: 23 };
       case '기초정보등록':
-        return { src:'/Subtract.png', width: 22, height: 22 };
+        return { src:'./Subtract.png', width: 22, height: 22 };
       case '장부관리':
-        return { src:'/Book_light.png', width: 23, height: 23 };
+        return { src:'./Book_light.png', width: 23, height: 23 };
       case '전기분개제표등':
-        return { src:'/Folder_file_alt_light.png', width: 24, height: 24 };
+        return { src:'./Folder_file_alt_light.png', width: 24, height: 24 };
       case '결산 및 재무제표':
-        return { src:'/Form_light.png', width: 22, height: 22 };
+        return { src:'./Form_light.png', width: 22, height: 22 };
       case '세무포탈(베스트빌)':
-        return { src:'/desktop_light.png', width: 22, height: 22 };
+        return { src:'./desktop_light.png', width: 22, height: 22 };
       case '고정자산 및 감가상각':
-        return { src:'/File_dock_light.png', width: 24, height: 24 };
+        return { src:'./File_dock_light.png', width: 24, height: 24 };
       case '세무대리':
-        return { src: process.env.PUBLIC_URL +'/User_cicrle_light.png', width: 24, height: 24 };
+        return { src: './User_cicrle_light.png', width: 24, height: 24 };
       default:
-        return { src: process.env.PUBLIC_URL +'/File_dock_light.png', width: 24, height: 24 };
+        return { src:'./File_dock_light.png', width: 24, height: 24 };
     }
   };
 
