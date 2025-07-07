@@ -1,10 +1,11 @@
 import React from 'react';
 import { TreeNode } from '../../types/tree';
 
+//props
 interface GnbClosedProps {
-  data: TreeNode[];
-  onToggle: () => void;
-  selectedId: number | null;
+  data: TreeNode[]; //메뉴트리
+  onToggle: () => void; // 사이드바 열기
+  selectedId: number | null; // 선택된 서브메뉴
 }
 
 // GnbClosed는 GNB가 접힌 상태일 때 보여줄 UI data: 메뉴 데이터 (TreeNode[]) onToggle: GNB를 열기 위한 버튼 핸들러 selectedId: 현재 선택된 메뉴 ID
@@ -61,7 +62,7 @@ const GnbClosed: React.FC<GnbClosedProps> = ({ data, onToggle, selectedId }) => 
               {item.children && (
                 <ul className="ml-4 rounded-[5px] absolute left-full top-0 bg-black text-white p-2 shadow-lg hidden group-hover:block z-10 min-w-[231px]">
                   <img className="w-3 h-5 relative right-4" src={process.env.PUBLIC_URL + '/Vector 513.png'}/> 
-                  <li className="noto-sans-kr-superbold px-2 pb-6 text-white text-[18px]">{item.title}</li>
+                  <li className="noto-sans-kr-superbold px-2 pb-6 text-white text-[18px]">{item.title}</li> {/*큰 제목 */}
                   <div className='mb-2 w-[90%] h-[1.5px] bg-white mx-auto bg-opacity-30'></div>
                   {/* 자식 메뉴 리스트 반복  */}
                   {item.children.map((child) => (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TreeNode } from '../../types/tree';
 
+// GnbOpen이라는 컴포넌트가 받을 정보들(값들)을 미리 정의
 interface GnbOpenProps { //props 정의 
   data: TreeNode[];       // data : 메뉴 데이터 (트리 구조)
   onToggle: () => void;   // onToggle :닫기 버튼 눌렀을 때 실행되는 함수
@@ -14,6 +15,7 @@ interface IconInfo { // 각 아이콘의 이미지 경로와 크기를 담기 �
   height: number;
 }
 
+// GnbOpen 컴포넌트 시작! props(위에서 정의한 정보들)를 받아옴
 const GnbOpen: React.FC<GnbOpenProps> = ({
   data,
   onToggle,
@@ -26,7 +28,9 @@ const GnbOpen: React.FC<GnbOpenProps> = ({
   // 이미 열려 있으면 닫고 (filter) 아니면 새로 열기 (push)
   const toggleMenu = (id: number) => {
     setOpenMenus((prev) =>
-      prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id]
+      prev.includes(id) //만약 이미 열려 있으면
+     ? prev.filter((v) => v !== id) // 닫기(빼기)
+      : [...prev, id] // 아니면 새로 열기(추가)
     );
   };
 
@@ -84,9 +88,10 @@ const GnbOpen: React.FC<GnbOpenProps> = ({
               {/* 1차 메뉴 */}
               <div
                 className="flex justify-between items-center cursor-pointer"
-                onClick={() => toggleMenu(item.id)}
+                onClick={() => toggleMenu(item.id)} //누르면 toggleMenu 실행
               >
                 <div className="flex items-center gap-2">
+                  {/* 1차 메뉴 아이콘 */}
                   <img
                     src={process.env.PUBLIC_URL + src}
                     alt="icon"

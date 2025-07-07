@@ -1,41 +1,47 @@
 import React, { useState } from "react";
-import { ClientWithCompanyDetails, Company } from "../../types/information";
+import { ClientWithCompanyDetails, Company } from "../../types/information"; // ts 인터페이스 / 거래처 전체 정보 (Client + Company)를 안전하게 다루기 위해 불러옵니다.
 import DatePicker from "react-datepicker";//날짜
 import { ko } from "date-fns/locale"; //날짜
 
-interface EditClientProps {
-  client: ClientWithCompanyDetails | null;
-  onCancel: () => void;
-  onSave: (updatedClient: ClientWithCompanyDetails) => void;
+//뼈대(props)
+interface EditClientProps { 
+  client: ClientWithCompanyDetails | null; // 수정할 거래처 정보
+  onCancel: () => void; // '취소'버튼 눌렀을 때 실행되는 함수 
+  onSave: (updatedClient: ClientWithCompanyDetails) => void; //'저장' 눌렀을 때 정보 넘기는 함수
 }
 
-const EditClient: React.FC<EditClientProps> = ({ client, onCancel, onSave }) => {
-  const [edited, setEdited] = useState<ClientWithCompanyDetails | null>(
+// edited 라는 변수에 복사된 거래처 정보를 담기 원본을 바로 바꾸지 않고 복사본을 수정
+const EditClient: React.FC<EditClientProps> = ({ client, onCancel, onSave }) => { //React.FC<EditClientProps>: 이 컴포넌트가 EditClientProps 모양의 props를 받는다는 표시
+  const [edited, setEdited] = useState<ClientWithCompanyDetails | null>( //edited : 화면에 띄울 수정 중인 데이터
     client && client.company
       ? {
         ...client,
-        company: { ...client.company },
+        company: { ...client.company }, // client가 있으면 스프레드 연산자 ...로 깊은 복사 company : {...client.company} 까지 복사해서 원본 데이터 (client)를 건드리지 않고 edited만 바꿀 수 있게 함
       }
       : null
   );
 
+  // 오류 처리 edited가 없으면 "잘못된 정보"라는 경고만 띄우고 더 아래 코드는 실행되지 않음
   if (!edited || !edited.company) {
     return <div className="text-red-500">잘못된 거래처 정보입니다.</div>;
   }
 
+  // c는 edited.company를 가리키는 별명
+  // 이제 계속 c.<필드명>으로 간단히 쓸 수 있다.
   const c = edited.company;
 
+  // 입력 칸에 글자를 쓰면 handleChange가 호출 field에 맞는 회사 정보 (c.brn, c.ceo_name 등) 새 값 (e.target.value)으로 바꿔요
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-    field: keyof Company
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>, // e: 이벤트 객체 . e.target.value 에 새 입력값
+    field: keyof Company //TS가 field를 Company 타입 키 중 하나로 제한 ("brn" 이나 "address"등)
   ) => {
-    setEdited((prev) =>
+    setEdited((prev) => //안전하게 이전 상태 (prev)를 가져와 새 객체를 만들어 덮어써요
       prev
         ? {
           ...prev,
           company: {
             ...prev.company,
-            [field]: e.target.value,
+            [field]: e.target.value, //객체 속성 동적 대입 -> 내가 클릭한 칸만 바뀜
           },
         }
         : null
@@ -44,9 +50,10 @@ const EditClient: React.FC<EditClientProps> = ({ client, onCancel, onSave }) => 
 
 
   // 우편번호 검색
+  //창에서 주소를 선택하면 setEdited로 우편번호(zipcode)와 주소(address)를 채워줌
   const callPostcode = () => {
-    new (window as any).daum.Postcode({
-      oncomplete: (data: any) => {
+    new (window as any).daum.Postcode({ // window.daum.Postcode :다음 API가 전역에 심어놓은 우편번호 검색창
+      oncomplete: (data: any) => {  //사용주가 주소를 고르면 oncomplete 실행 -> data.zonecode, data.address를 edited.company에 채워줌
         setEdited((prev) =>
           prev
             ? {
